@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#1a2a2a">
+<meta name="description" content="RV Music — Live orchestra, band shows, weddings, Sufi nights and cultural events by Singer Rahul Raj, Indore.">
+<title>RV Music</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+<style>
+  * { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    overflow-x: hidden;
+  }
+  button, a { transition: background-color .3s ease, color .3s ease, transform .2s ease, opacity .3s ease; }
+  button:hover, a:hover { transform: translateY(-2px); }
+  button:active, a:active { transform: translateY(0); }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #1a1a1a; }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#d97706,#92400e); border-radius: 5px; }
+  ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg,#f59e0b,#b45309); }
+
+  @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-14px);} }
+  @keyframes equalizer { 0%,100%{height:12px;} 50%{height:38px;} }
+  @keyframes pulseSlow { 0%,100%{opacity:.3;} 50%{opacity:.6;} }
+  @keyframes fadeIn { from{opacity:0; transform:translateY(20px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes notePop { 0%,100%{transform:scale(.7); opacity:.15;} 50%{transform:scale(1.25); opacity:.5;} }
+  @keyframes spinSlow { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  .animate-float { animation: float 6s ease-in-out infinite; }
+  .animate-equalizer { animation: equalizer 1s ease-in-out infinite; }
+  .animate-pulse-slow { animation: pulseSlow 4s ease-in-out infinite; }
+  .animate-spin-slow { animation: spinSlow 18s linear infinite; }
+  .fade-in { animation: fadeIn .6s ease-out; }
+  .note { pointer-events: none; }
+  .note-float { animation: float 5s ease-in-out infinite; }
+  .note-pop { animation: notePop 3.5s ease-in-out infinite; transform-origin: center; }
+  .drop-shadow-glow { filter: drop-shadow(0 0 8px rgba(251,191,36,.6)); }
+  .bg-gradient-radial { background: radial-gradient(circle, var(--tw-gradient-stops)); }
+  .gradient-text {
+    background: linear-gradient(135deg,#fbbf24 0%,#d97706 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .card-hover { transition: box-shadow .3s ease, transform .3s ease; }
+  .card-hover:hover { box-shadow: 0 20px 40px rgba(217,119,6,.3); transform: translateY(-5px); }
+  .glass { background: rgba(0,0,0,.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(251,191,36,.1); }
+  ::selection { background-color: rgba(251,191,36,.3); color:#fff; }
+  button:focus-visible, a:focus-visible { outline: 2px solid #fbbf24; outline-offset: 2px; }
+  video { border: none; display: block; background:#000; }
+  .dot { width:.5rem; height:.5rem; border-radius:9999px; background: rgba(120,53,15,.5); transition: all .3s ease; border:0; cursor:pointer; padding:0; flex:none; }
+  .dot.active { width:2rem; background:#fbbf24; }
+  .thumb-btn { border:0; background:transparent; padding:0; cursor:pointer; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-float, .animate-equalizer, .animate-pulse-slow, .animate-spin-slow, .note-float, .note-pop, .fade-in { animation: none !important; }
+  }
+  #bottom-contact-bar { box-shadow: 0 -4px 20px rgba(0,0,0,.4); }
+
+  /* Footer credit link style */
+  .credit-link {
+    color: #fbbf24;
+    text-decoration: none;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+  }
+  .credit-link:hover {
+    color: #f59e0b;
+    text-shadow: 0 0 12px rgba(251,191,36,0.3);
+    transform: translateY(-1px);
+  }
+</style>
+</head>
+<body class="dark min-h-screen">
+<div class="min-h-screen bg-gradient-to-br from-[#4a1a1a] via-[#2a3a3a] to-[#1a2a2a] text-white pb-20">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-amber-900/20">
+    <div class="container mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+          <img alt="RV Music Logo" class="w-10 h-10 rounded-full object-cover border-2 border-amber-600/50" src="https://rv-music.com/RV%20music%20logo.png">
+          <span class="text-2xl font-bold text-amber-400">RV MUSIC</span>
+        </div>
+        <div class="hidden md:flex items-center space-x-8" id="nav-links">
+          <button data-scroll="home" class="hover:text-amber-400 transition-colors">Homepage</button>
+          <button data-scroll="performances" class="hover:text-amber-400 transition-colors">Performances</button>
+          <button data-scroll="gallery" class="hover:text-amber-400 transition-colors">Gallery</button>
+          <button data-scroll="contact" class="hover:text-amber-400 transition-colors">Contact</button>
+          <button data-scroll="channels" class="hover:text-amber-400 transition-colors">Channels & Reviews</button>
+        </div>
+        <button id="menu-btn" aria-label="Open menu" aria-expanded="false" class="md:hidden inline-flex items-center justify-center h-9 w-9 rounded-md hover:bg-white/10">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden mt-4 flex flex-col space-y-3 pb-2">
+        <button data-scroll="home" class="text-left hover:text-amber-400 transition-colors">Homepage</button>
+        <button data-scroll="performances" class="text-left hover:text-amber-400 transition-colors">Performances</button>
+        <button data-scroll="gallery" class="text-left hover:text-amber-400 transition-colors">Gallery</button>
+        <button data-scroll="contact" class="text-left hover:text-amber-400 transition-colors">Contact</button>
+        <button data-scroll="channels" class="text-left hover:text-amber-400 transition-colors">Channels & Reviews</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="home" class="pt-32 pb-16 px-4 relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-96 h-96 bg-gradient-radial from-amber-600/20 via-amber-600/10 to-transparent rounded-full blur-3xl animate-pulse-slow" style="animation-duration:4s"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-gradient-radial from-amber-500/20 via-amber-500/10 to-transparent rounded-full blur-3xl animate-pulse-slow" style="animation-duration:5s;animation-delay:1s"></div>
+
+    <!-- floating / popping decorative music notes -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
+      <svg class="note note-float absolute text-amber-500/25" style="left:3%;top:38%;width:34px;height:52px;animation-delay:.2s" viewBox="0 0 24 36" fill="currentColor"><path d="M12 2C9 2 6.5 4.5 6.5 7.5c0 2.2 1.3 4.1 3.2 5V27c0 1.9-1.6 3.5-3.5 3.5S2.7 28.9 2.7 27h-2C.7 30.6 3.6 33.5 7.2 33.5S13.7 30.6 13.7 27V12.5c1.9 0 3.5-1.6 3.5-3.5S15.6 5.5 13.7 5.5c-.4 0-.8.1-1.2.2.5-.8.8-1.7.8-2.7C13.3 2.5 12.7 2 12 2z"/></svg>
+      <svg class="note note-pop absolute text-amber-400/30" style="left:8%;top:48%;width:20px;height:30px;animation-delay:0s" viewBox="0 0 24 36" fill="currentColor"><path d="M12 2C9 2 6.5 4.5 6.5 7.5c0 2.2 1.3 4.1 3.2 5V27c0 1.9-1.6 3.5-3.5 3.5S2.7 28.9 2.7 27h-2C.7 30.6 3.6 33.5 7.2 33.5S13.7 30.6 13.7 27V12.5c1.9 0 3.5-1.6 3.5-3.5S15.6 5.5 13.7 5.5c-.4 0-.8.1-1.2.2.5-.8.8-1.7.8-2.7C13.3 2.5 12.7 2 12 2z"/></svg>
+      <svg class="note note-float absolute text-amber-500/20" style="left:14%;top:12%;width:24px;height:36px;animation-delay:1.4s" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3v18c-.8-.5-1.8-.8-3-.8-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5V8l8-1.5v10.3c-.8-.5-1.8-.8-3-.8-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5V3l-12 2z"/></svg>
+      <svg class="note note-pop absolute text-amber-400/25" style="right:6%;top:44%;width:26px;height:40px;animation-delay:.8s" viewBox="0 0 24 36" fill="currentColor"><path d="M12 2C9 2 6.5 4.5 6.5 7.5c0 2.2 1.3 4.1 3.2 5V27c0 1.9-1.6 3.5-3.5 3.5S2.7 28.9 2.7 27h-2C.7 30.6 3.6 33.5 7.2 33.5S13.7 30.6 13.7 27V12.5c1.9 0 3.5-1.6 3.5-3.5S15.6 5.5 13.7 5.5c-.4 0-.8.1-1.2.2.5-.8.8-1.7.8-2.7C13.3 2.5 12.7 2 12 2z"/></svg>
+      <svg class="note note-float absolute text-amber-500/25" style="right:11%;top:52%;width:32px;height:48px;animation-delay:2.1s" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3v18c-.8-.5-1.8-.8-3-.8-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5V8l8-1.5v10.3c-.8-.5-1.8-.8-3-.8-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5V3l-12 2z"/></svg>
+      <svg class="note note-pop absolute text-amber-400/20" style="right:3%;top:16%;width:18px;height:27px;animation-delay:1.6s" viewBox="0 0 24 36" fill="currentColor"><path d="M12 2C9 2 6.5 4.5 6.5 7.5c0 2.2 1.3 4.1 3.2 5V27c0 1.9-1.6 3.5-3.5 3.5S2.7 28.9 2.7 27h-2C.7 30.6 3.6 33.5 7.2 33.5S13.7 30.6 13.7 27V12.5c1.9 0 3.5-1.6 3.5-3.5S15.6 5.5 13.7 5.5c-.4 0-.8.1-1.2.2.5-.8.8-1.7.8-2.7C13.3 2.5 12.7 2 12 2z"/></svg>
+    </div>
+
+    <div class="container mx-auto relative z-10">
+      <div class="text-center mb-12">
+        <div class="flex justify-center mb-6 relative">
+          <div class="relative w-24 h-24 md:w-28 md:h-28">
+            <div class="absolute -inset-2 rounded-full border border-dashed border-amber-500/50 animate-spin-slow"></div>
+            <div class="w-full h-full rounded-full border-2 border-amber-500/70 p-1 bg-black/60 drop-shadow-glow animate-float">
+              <img src="https://rv-music.com/RV%20music%20logo.png" alt="RV Music" class="w-full h-full rounded-full object-cover">
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row md:items-end md:justify-center gap-1 md:gap-4">
+          <h1 class="text-5xl md:text-7xl font-bold text-amber-400 drop-shadow-lg relative z-10 leading-none">RV MUSIC</h1>
+          <div class="flex flex-col items-center md:items-start gap-2 md:mb-2">
+            <div class="flex items-end justify-center md:justify-start gap-1 h-8 md:h-10" id="equalizer" aria-hidden="true"></div>
+            <p class="text-base md:text-xl text-amber-200/90 font-medium relative z-10 text-center md:text-left">Perform all musical activities<br class="hidden md:block">and live events programs</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto items-start">
+        <div class="rounded-xl border text-card-foreground shadow bg-black/30 backdrop-blur border-amber-900/30 card-hover">
+          <div class="p-8">
+            <h2 class="text-2xl font-bold text-amber-400 mb-1">Singer Rahul Raj Presents by</h2>
+            <h3 class="text-xl text-amber-200 mb-6">Perform All activities and musical events</h3>
+            <div class="space-y-4">
+              <div class="flex items-center space-x-3 text-lg"><span class="text-2xl">🎤</span><span class="text-gray-200">Live Orchestra &amp; Band Shows</span></div>
+              <div class="flex items-center space-x-3 text-lg"><span class="text-2xl">💒</span><span class="text-gray-200">Wedding &amp; Reception Events</span></div>
+              <div class="flex items-center space-x-3 text-lg"><span class="text-2xl">🕉️</span><span class="text-gray-200">Bhajan &amp; Spiritual Nights</span></div>
+              <div class="flex items-center space-x-3 text-lg"><span class="text-2xl">🕌</span><span class="text-gray-200">Sufi &amp; Ghazal Concerts</span></div>
+              <div class="flex items-center space-x-3 text-lg"><span class="text-2xl">🎉</span><span class="text-gray-200">Corporate &amp; Cultural Programs</span></div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-amber-900/30">
+              <h4 class="text-lg font-semibold text-amber-400 mb-3">Music Genres</h4>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 bg-amber-900/40 rounded-full text-sm">Bollywood</span>
+                <span class="px-3 py-1 bg-amber-900/40 rounded-full text-sm">Sufi</span>
+                <span class="px-3 py-1 bg-amber-900/40 rounded-full text-sm">Retro</span>
+                <span class="px-3 py-1 bg-amber-900/40 rounded-full text-sm">Devotional</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-lg overflow-hidden border border-amber-900/30 hover:border-amber-600/50 transition-all">
+            <div class="relative bg-black rounded-lg overflow-hidden" style="aspect-ratio:16/9">
+              <video id="hero-video" class="w-full h-full object-contain" controls playsinline preload="metadata"></video>
+            </div>
+          </div>
+          <p class="text-center text-sm text-gray-400 mt-2" id="hero-video-title"></p>
+          <div class="flex justify-center items-center space-x-4 mt-4">
+            <button id="hero-prev" aria-label="Previous video" class="p-2 bg-amber-900/40 hover:bg-amber-900/60 rounded-full transition-colors"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+            <div class="flex items-center space-x-2" id="hero-dots"></div>
+            <button id="hero-next" aria-label="Next video" class="p-2 bg-amber-900/40 hover:bg-amber-900/60 rounded-full transition-colors"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCES -->
+  <section id="performances" class="py-16 px-4 bg-black/20">
+    <div class="container mx-auto">
+      <!-- Changed items-start to items-center to vertically center content -->
+      <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 items-center">
+        <div>
+          <h2 class="text-4xl font-bold text-amber-400 mb-6">Performances</h2>
+          <p class="text-lg text-gray-300 mb-6">Experience the magic of live music with RV Music. From soulful Sufi nights to energetic Bollywood performances, we bring every event to life with our passion and professionalism.</p>
+          <p class="text-gray-400 mb-4">Click below to explore our past performances and memorable events that have touched hearts across the region.</p>
+          <button id="view-past-performances" class="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-lg font-semibold transition-colors shadow-lg shadow-amber-600/30">View Past Performances</button>
+        </div>
+        <div class="relative">
+          <div class="bg-black/50 rounded-lg overflow-hidden border border-amber-900/30 mx-auto relative group" style="max-width:400px">
+            <div class="relative" style="aspect-ratio:9/16">
+              <img id="performance-photo" alt="Live performance by Singer Rahul Raj" class="w-full h-full object-contain">
+              <div class="absolute inset-0 flex items-center justify-between px-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                <button id="performance-prev" aria-label="Previous photo" class="p-2 bg-black/70 hover:bg-amber-600 rounded-full transition-all transform hover:scale-110"><i data-lucide="chevron-left" class="w-6 h-6 text-white"></i></button>
+                <button id="performance-next" aria-label="Next photo" class="p-2 bg-black/70 hover:bg-amber-600 rounded-full transition-all transform hover:scale-110"><i data-lucide="chevron-right" class="w-6 h-6 text-white"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-3">
+            <h3 class="text-xl font-semibold text-amber-400">Singer Rahul Raj</h3>
+          </div>
+          <div class="flex justify-center items-center flex-wrap gap-2 mt-3" id="performance-dots"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" class="py-16 px-4 bg-black/20">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-amber-400 mb-12 text-center">Our Gallery</h2>
+
+        <div class="flex items-center justify-center gap-4">
+          <div class="hidden lg:block w-48 opacity-50 hover:opacity-80 transition-opacity">
+            <button id="gallery-prev-thumb" class="thumb-btn w-full" aria-label="Previous video">
+              <div class="rounded-lg overflow-hidden border border-amber-900/30" style="aspect-ratio:16/9">
+                <video class="w-full h-full object-contain pointer-events-none" muted playsinline preload="metadata"></video>
+              </div>
+            </button>
+          </div>
+
+          <div class="flex-1 max-w-3xl">
+            <div class="rounded-lg overflow-hidden border-2 border-amber-600/50 shadow-2xl shadow-amber-600/20">
+              <div class="relative bg-black rounded-lg overflow-hidden" style="aspect-ratio:16/9">
+                <video id="gallery-main-video" class="w-full h-full object-contain" controls playsinline preload="metadata"></video>
+              </div>
+            </div>
+            <p class="text-center text-white text-sm font-semibold mt-2" id="gallery-main-title"></p>
+          </div>
+
+          <div class="hidden lg:block w-48 opacity-50 hover:opacity-80 transition-opacity">
+            <button id="gallery-next-thumb" class="thumb-btn w-full" aria-label="Next video">
+              <div class="rounded-lg overflow-hidden border border-amber-900/30" style="aspect-ratio:16/9">
+                <video class="w-full h-full object-contain pointer-events-none" muted playsinline preload="metadata"></video>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex justify-center items-center space-x-4 mt-8">
+          <button id="gallery-prev" aria-label="Previous video" class="p-3 bg-amber-900/40 hover:bg-amber-900/60 rounded-full transition-colors"><i data-lucide="chevron-left" class="w-7 h-7"></i></button>
+          <div class="flex items-center flex-wrap justify-center gap-2 max-w-md" id="gallery-dots"></div>
+          <button id="gallery-next" aria-label="Next video" class="p-3 bg-amber-900/40 hover:bg-amber-900/60 rounded-full transition-colors"><i data-lucide="chevron-right" class="w-7 h-7"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="py-16 px-4">
+    <div class="container mx-auto">
+      <div class="max-w-2xl mx-auto">
+        <h2 class="text-4xl font-bold text-amber-400 mb-12 text-center">Contact Us</h2>
+        <div class="rounded-xl border text-card-foreground shadow bg-black/30 backdrop-blur border-amber-900/30">
+          <div class="p-8">
+            <div class="space-y-6">
+              <a href="https://wa.me/917974807926" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between p-4 bg-green-900/30 hover:bg-green-900/50 rounded-lg border border-green-700/30 transition-colors group">
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="message-circle" class="w-6 h-6 text-green-400"></i>
+                  <span class="text-lg font-semibold">WhatsApp Chat</span>
+                </div>
+                <span class="text-amber-400 group-hover:text-amber-300">7974807926</span>
+              </a>
+              <a href="https://wa.me/917974807926?text=I%20want%20to%20book%20RV%20Music" target="_blank" rel="noopener noreferrer"
+                class="flex items-center justify-between p-4 bg-green-900/30 hover:bg-green-900/50 rounded-lg border border-green-700/30 transition-colors group">
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="phone" class="w-6 h-6 text-green-400"></i>
+                  <span class="text-lg font-semibold">WhatsApp Call</span>
+                </div>
+                <span class="text-amber-400 group-hover:text-amber-300">7974807926</span>
+              </a>
+              <a href="tel:+919201370557"
+                class="flex items-center justify-between p-4 bg-amber-900/30 hover:bg-amber-900/50 rounded-lg border border-amber-700/30 transition-colors group">
+                <div class="flex items-center space-x-3">
+                  <i data-lucide="phone" class="w-6 h-6 text-amber-400"></i>
+                  <span class="text-lg font-semibold">Normal Call</span>
+                </div>
+                <span class="text-amber-400 group-hover:text-amber-300">9201370557</span>
+              </a>
+            </div>
+            <div class="mt-6 pt-6 border-t border-amber-900/30 text-center">
+              <p class="text-sm text-gray-400">🔔 Note: Chat responses may be delayed.<br>📲 For faster and clear communication, please call directly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHANNELS & REVIEWS -->
+  <section id="channels" class="py-16 px-4 bg-black/20">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <h2 class="text-4xl font-bold text-amber-400 mb-12 text-center">Channels &amp; Reviews</h2>
+
+        <div class="rounded-xl border text-card-foreground shadow bg-black/30 backdrop-blur border-amber-900/30 mb-12">
+          <div class="p-8">
+            <h3 class="text-2xl font-bold text-amber-400 mb-6">Watch us on</h3>
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div class="flex-1 w-full space-y-4">
+                <a href="https://youtube.com/@rahulrajmusic1" target="_blank" rel="noopener noreferrer"
+                  class="flex items-center space-x-3 p-4 bg-red-900/30 hover:bg-red-900/50 rounded-lg border border-red-700/30 transition-colors">
+                  <div class="text-red-400"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></div>
+                  <div><p class="font-semibold">YouTube</p><p class="text-sm text-gray-400">@rahulrajmusic1</p></div>
+                </a>
+                <a href="https://instagram.com/rv.music1" target="_blank" rel="noopener noreferrer"
+                  class="flex items-center space-x-3 p-4 bg-pink-900/30 hover:bg-pink-900/50 rounded-lg border border-pink-700/30 transition-colors">
+                  <div class="text-pink-400"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></div>
+                  <div><p class="font-semibold">Instagram</p><p class="text-sm text-gray-400">@rv.music1</p></div>
+                </a>
+              </div>
+              <div class="flex gap-6">
+                <div class="text-center">
+                  <img alt="YouTube QR code" class="w-32 h-32 rounded-lg border-2 border-red-700/50" src="https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/xgly51if_youtube%20qr%20code.jpeg">
+                  <p class="text-xs text-gray-400 mt-2">YouTube</p>
+                </div>
+                <div class="text-center">
+                  <img alt="Instagram QR code" class="w-32 h-32 rounded-lg border-2 border-pink-700/50" src="https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/r1i2s33o_insta%20qr%20code.jpeg">
+                  <p class="text-xs text-gray-400 mt-2">Instagram</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-2xl font-bold text-amber-400 mb-4">Reviews</h3>
+          <div class="rounded-xl border text-card-foreground shadow bg-black/30 backdrop-blur border-amber-900/30">
+            <div class="p-6">
+              <h4 class="text-xl font-semibold text-amber-300 mb-4">On Google</h4>
+              <div class="grid md:grid-cols-3 gap-4">
+                <div class="p-4 bg-black/40 rounded-lg border border-amber-900/20">
+                  <div class="flex items-center justify-between mb-2"><p class="font-semibold">Priya Sharma</p><div class="flex text-amber-400">★★★★★</div></div>
+                  <p class="text-sm text-gray-300 mb-2">Absolutely mesmerizing performance at our wedding! Rahul ji's voice and the band's energy made our special day unforgettable. Highly recommended!</p>
+                  <p class="text-xs text-gray-500">2 weeks ago</p>
+                </div>
+                <div class="p-4 bg-black/40 rounded-lg border border-amber-900/20">
+                  <div class="flex items-center justify-between mb-2"><p class="font-semibold">Amit Patel</p><div class="flex text-amber-400">★★★★★</div></div>
+                  <p class="text-sm text-gray-300 mb-2">Professional and talented team. They performed at our corporate event and received a standing ovation. Worth every penny!</p>
+                  <p class="text-xs text-gray-500">1 month ago</p>
+                </div>
+                <div class="p-4 bg-black/40 rounded-lg border border-amber-900/20">
+                  <div class="flex items-center justify-between mb-2"><p class="font-semibold">Meera Verma</p><div class="flex text-amber-400">★★★★★</div></div>
+                  <p class="text-sm text-gray-300 mb-2">The Sufi night organized by RV Music was soul-stirring. Rahul ji's voice has a divine quality. Looking forward to attending more events.</p>
+                  <p class="text-xs text-gray-500">3 weeks ago</p>
+                </div>
+                <div class="p-4 bg-black/40 rounded-lg border border-amber-900/20">
+                  <div class="flex items-center justify-between mb-2"><p class="font-semibold">Rajesh Kumar</p><div class="flex text-amber-400">★★★★★</div></div>
+                  <p class="text-sm text-gray-300 mb-2">Exceptional musical talent! The band played at our reception and guests are still talking about it. Very professional service.</p>
+                  <p class="text-xs text-gray-500">2 months ago</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-12 px-4 bg-black/40 border-t border-amber-900/20">
+    <div class="container mx-auto">
+      <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <div>
+            <h3 class="text-xl font-bold text-amber-400 mb-4">RV MUSIC</h3>
+            <p class="text-gray-400">Vijay Nagar, Indore (M.P.)</p>
+            <p class="text-gray-400 mt-2">Live • Musical • Memorable</p>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-amber-400 mb-4">Quick Links</h4>
+            <div class="space-y-2">
+              <button data-scroll="home" class="block text-gray-400 hover:text-amber-400 transition-colors">Homepage</button>
+              <button data-scroll="performances" class="block text-gray-400 hover:text-amber-400 transition-colors">Performances</button>
+              <button data-scroll="gallery" class="block text-gray-400 hover:text-amber-400 transition-colors">Gallery</button>
+              <button data-scroll="contact" class="block text-gray-400 hover:text-amber-400 transition-colors">Contact</button>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-lg font-semibold text-amber-400 mb-4">Connect With Us</h4>
+            <div class="space-y-2">
+              <a href="https://youtube.com/@rahulrajmusic1" target="_blank" rel="noopener noreferrer" class="block text-gray-400 hover:text-amber-400 transition-colors">YouTube: @rahulrajmusic1</a>
+              <a href="https://instagram.com/rv.music1" target="_blank" rel="noopener noreferrer" class="block text-gray-400 hover:text-amber-400 transition-colors">Instagram: @rv.music1</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer credit line – new addition -->
+        <div class="pt-6 border-t border-amber-900/20 text-center">
+          <p class="text-gray-400 text-sm">
+            Website made by –
+            <a href="https://sakshamrathore0077-design.github.io/Ideas-Into-Impact/"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="credit-link font-medium">
+              Ideas Into Impact WebDevs
+            </a>
+          </p>
+          <p class="text-gray-500 text-xs mt-3">© <span id="year"></span> RV MUSIC - Indore. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- STICKY BOTTOM CONTACT BAR — redesigned to match screenshot (green & amber) -->
+<div id="bottom-contact-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-black/90 backdrop-blur-md border-t border-amber-600/40">
+  <div class="grid grid-cols-2 max-w-3xl mx-auto">
+    <!-- WhatsApp button (green) -->
+    <a href="https://wa.me/917974807926" target="_blank" rel="noopener noreferrer"
+      class="flex items-center justify-center gap-2 py-3 px-2 bg-green-600 hover:bg-green-500 transition-colors">
+      <i data-lucide="message-circle" class="w-5 h-5 text-white flex-shrink-0"></i>
+      <span class="text-white font-bold text-sm sm:text-base leading-tight">
+        WhatsApp<br class="sm:hidden"><span class="hidden sm:inline"> </span>7974807926
+      </span>
+    </a>
+    <!-- Call Now button (amber/gold) -->
+    <a href="tel:+919201370557"
+      class="flex items-center justify-center gap-2 py-3 px-2 bg-amber-500 hover:bg-amber-400 transition-colors">
+      <i data-lucide="phone-call" class="w-5 h-5 text-black flex-shrink-0"></i>
+      <span class="text-black font-bold text-sm sm:text-base leading-tight">
+        Call Now<br class="sm:hidden"><span class="hidden sm:inline"> </span>9201370557
+      </span>
+    </a>
+  </div>
+</div>
+
+<!-- PAST PERFORMANCES MODAL -->
+<div id="past-performances-modal" class="hidden fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm p-4 overflow-y-auto">
+  <div class="max-w-5xl mx-auto bg-[#1a1a1a] border border-amber-900/40 rounded-xl mt-10 mb-10">
+    <div class="flex items-center justify-between p-6 border-b border-amber-900/30 sticky top-0 bg-[#1a1a1a] rounded-t-xl">
+      <h3 class="text-2xl font-bold text-amber-400">Past Performances</h3>
+      <button id="close-past-performances" aria-label="Close" class="p-2 hover:bg-white/10 rounded-full"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+    <div class="p-6 grid md:grid-cols-2 gap-6" id="past-performances-grid"></div>
+  </div>
+</div>
+
+<!-- VIDEO LIGHTBOX -->
+<div id="video-lightbox" class="hidden fixed inset-0 z-[70] bg-black/90 flex items-center justify-center p-4">
+  <div class="w-full max-w-3xl">
+    <div class="flex justify-end mb-2">
+      <button id="close-video-lightbox" aria-label="Close video" class="p-2 hover:bg-white/10 rounded-full text-white"><i data-lucide="x" class="w-6 h-6"></i></button>
+    </div>
+    <video id="lightbox-video" class="w-full rounded-lg" controls autoplay playsinline></video>
+  </div>
+</div>
+
+<script>
+  lucide.createIcons();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // =========================================================================
+  // DATA — as supplied. All media is still hosted on the emergent.sh preview
+  // CDN (customer-assets.emergentagent.com) because that's where the actual
+  // files live; only the *site code* itself has been rebuilt with no
+  // emergent.sh runtime/analytics scripts. Re-host these files on your own
+  // storage (or an unlisted YouTube/Vimeo link) and swap the URLs below
+  // whenever you're ready to fully drop that dependency.
+  // =========================================================================
+  var heroVideos = [
+    { id: 1, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/8yizvoz1_vid6.mp4", title: "Sufi Performance", duration: "5:30" },
+    { id: 2, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/jj8ireyq_vid3.mp4", title: "Wedding Event", duration: "6:45" },
+    { id: 3, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/qil5qpxs_vid5.mp4", title: "Bollywood Night", duration: "5:50" },
+    { id: 4, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/w7c4l507_vid9.mp4", title: "Ghazal Evening", duration: "5:50" },
+    { id: 5, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/cxwjsz41_vid7.mp4", title: "Corporate Event", duration: "4:30" },
+    { id: 6, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/maqdf5pz_vid8.mp4", title: "Retro Performance", duration: "7:10" },
+    { id: 7, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/k5y46jub_vid10.mp4", title: "Live Orchestra", duration: "6:00" },
+    { id: 8, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/hivmzrox_vid2.mp4", title: "Devotional Concert", duration: "4:15" }
+  ];
+
+  var performanceMedia = [
+    { id: 1, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/nq530ymg_rvph1.jpg", title: "Live Performance 1" },
+    { id: 2, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/f4a57bfb_phnews2.jpeg", title: "Performance Photo 2" },
+    { id: 3, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/4f7lwmn2_phnews1.jpeg", title: "Live Performance 3" },
+    { id: 4, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/ywg56bjs_phnews6.jpeg", title: "Performance Photo 4" },
+    { id: 5, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/5z0r5yor_ph69.jpeg", title: "Live Performance 5" },
+    { id: 6, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/nq530ymg_rvph1.jpg", title: "Performance Photo 6" },
+    { id: 7, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/f4a57bfb_phnews2.jpeg", title: "Live Performance 7" },
+    { id: 8, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/4f7lwmn2_phnews1.jpeg", title: "Performance Photo 8" },
+    { id: 9, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/ywg56bjs_phnews6.jpeg", title: "Live Performance 9" },
+    { id: 10, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/5z0r5yor_ph69.jpeg", title: "Performance Photo 10" }
+  ];
+
+  var pastPerformances = [
+    { id: 1, type: "Sufi Concert", date: "15/January/2025", venue: "Royal Palace, Indore", attendees: "500+ Audience", image: "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?w=800", video: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/qil5qpxs_vid5.mp4" },
+    { id: 2, type: "Wedding Reception", date: "08/February/2025", venue: "Grand Celebration Hall, Bhopal", attendees: "800+ Guests", image: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800", video: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/maqdf5pz_vid8.mp4" },
+    { id: 3, type: "Corporate Event", date: "22/March/2025", venue: "IT Park Convention Center", attendees: "1000+ Employees", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800", video: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/k5y46jub_vid10.mp4" },
+    { id: 4, type: "Bhajan Night", date: "10/April/2025", venue: "Temple Grounds, Ujjain", attendees: "2000+ Devotees", image: "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800", video: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/qil5qpxs_vid5.mp4" },
+    { id: 5, type: "Ghazal Evening", date: "05/May/2025", venue: "Cultural Center, Indore", attendees: "600+ Music Lovers", image: "https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?w=800", video: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/maqdf5pz_vid8.mp4" }
+  ];
+
+  var galleryVideos = [
+    { id: 1, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/8yizvoz1_vid6.mp4", title: "Sufi Performance - Indore", duration: "5:30" },
+    { id: 2, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/hivmzrox_vid2.mp4", title: "Wedding Sangeet Night", duration: "4:15" },
+    { id: 3, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/loosxfqv_vd67.mp4", title: "Devotional Concert", duration: "8:20" },
+    { id: 4, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/jj8ireyq_vid3.mp4", title: "Bollywood Medley Live", duration: "6:45" },
+    { id: 5, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/w7c4l507_vid9.mp4", title: "Ghazal Evening - Bhopal", duration: "5:50" },
+    { id: 6, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/q1ds4t4a_vid4.mp4", title: "Corporate Event Highlights", duration: "4:30" },
+    { id: 7, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/nx1l9pbg_vid70.mp4", title: "Retro Night Performance", duration: "7:10" },
+    { id: 8, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/qil5qpxs_vid5.mp4", title: "Bhajan Sandhya", duration: "6:00" },
+    { id: 9, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/cxwjsz41_vid7.mp4", title: "Reception Grand Entry", duration: "3:45" },
+    { id: 10, url: "https://customer-assets.emergentagent.com/job_rvmusic-live-5/artifacts/maqdf5pz_vid8.mp4", title: "Live Orchestra Show", duration: "9:15" }
+  ];
+
+  // =========================================================================
+  // Nav / mobile menu
+  // =========================================================================
+  document.querySelectorAll('[data-scroll]').forEach(function (el) {
+    el.addEventListener('click', function () {
+      var target = document.getElementById(el.getAttribute('data-scroll'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+      mobileMenu.classList.add('hidden');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+  var menuBtn = document.getElementById('menu-btn');
+  var mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', function () {
+    var isHidden = mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', String(!isHidden));
+  });
+
+  // equalizer bars
+  (function () {
+    var wrap = document.getElementById('equalizer');
+    for (var i = 0; i < 20; i++) {
+      var bar = document.createElement('div');
+      bar.className = 'w-1 bg-amber-400 rounded-full animate-equalizer';
+      bar.style.animationDelay = (i * 0.1) + 's';
+      wrap.appendChild(bar);
+    }
+  })();
+
+  // =========================================================================
+  // Generic dot-nav carousel helper
+  // =========================================================================
+  function makeDots(container, count, onSelect) {
+    container.innerHTML = '';
+    var dots = [];
+    for (var i = 0; i < count; i++) {
+      var d = document.createElement('button');
+      d.className = 'dot';
+      d.setAttribute('aria-label', 'Go to item ' + (i + 1));
+      (function (idx) { d.addEventListener('click', function () { onSelect(idx); }); })(i);
+      container.appendChild(d);
+      dots.push(d);
+    }
+    return dots;
+  }
+
+  // ---- Hero video carousel ----
+  var heroIndex = 0;
+  var heroVideoEl = document.getElementById('hero-video');
+  var heroTitleEl = document.getElementById('hero-video-title');
+  var heroDots = makeDots(document.getElementById('hero-dots'), heroVideos.length, heroGoTo);
+  function heroRender() {
+    heroVideoEl.src = heroVideos[heroIndex].url;
+    heroTitleEl.textContent = heroVideos[heroIndex].title + ' · ' + heroVideos[heroIndex].duration;
+    heroDots.forEach(function (d, i) { d.classList.toggle('active', i === heroIndex); });
+  }
+  function heroGoTo(i) { heroIndex = i; heroRender(); }
+  document.getElementById('hero-prev').addEventListener('click', function () { heroGoTo((heroIndex - 1 + heroVideos.length) % heroVideos.length); });
+  document.getElementById('hero-next').addEventListener('click', function () { heroGoTo((heroIndex + 1) % heroVideos.length); });
+  heroRender();
+
+  // ---- Performances photo carousel ----
+  var perfIndex = 0;
+  var perfImgEl = document.getElementById('performance-photo');
+  var perfDots = makeDots(document.getElementById('performance-dots'), performanceMedia.length, perfGoTo);
+  function perfRender() {
+    perfImgEl.src = performanceMedia[perfIndex].url;
+    perfImgEl.alt = performanceMedia[perfIndex].title;
+    perfDots.forEach(function (d, i) { d.classList.toggle('active', i === perfIndex); });
+  }
+  function perfGoTo(i) { perfIndex = i; perfRender(); }
+  document.getElementById('performance-prev').addEventListener('click', function () { perfGoTo((perfIndex - 1 + performanceMedia.length) % performanceMedia.length); });
+  document.getElementById('performance-next').addEventListener('click', function () { perfGoTo((perfIndex + 1) % performanceMedia.length); });
+  perfRender();
+
+  // ---- Gallery video carousel (with side thumbnails) ----
+  var galleryIndex = 0;
+  var galleryMainVideo = document.getElementById('gallery-main-video');
+  var galleryMainTitle = document.getElementById('gallery-main-title');
+  var galleryPrevThumb = document.querySelector('#gallery-prev-thumb video');
+  var galleryNextThumb = document.querySelector('#gallery-next-thumb video');
+  var galleryDots = makeDots(document.getElementById('gallery-dots'), galleryVideos.length, galleryGoTo);
+  function galleryRender() {
+    galleryMainVideo.src = galleryVideos[galleryIndex].url;
+    galleryMainTitle.textContent = galleryVideos[galleryIndex].title + ' · ' + galleryVideos[galleryIndex].duration;
+    var prevIdx = (galleryIndex - 1 + galleryVideos.length) % galleryVideos.length;
+    var nextIdx = (galleryIndex + 1) % galleryVideos.length;
+    galleryPrevThumb.src = galleryVideos[prevIdx].url;
+    galleryNextThumb.src = galleryVideos[nextIdx].url;
+    galleryDots.forEach(function (d, i) { d.classList.toggle('active', i === galleryIndex); });
+  }
+  function galleryGoTo(i) { galleryIndex = i; galleryRender(); }
+  document.getElementById('gallery-prev').addEventListener('click', function () { galleryGoTo((galleryIndex - 1 + galleryVideos.length) % galleryVideos.length); });
+  document.getElementById('gallery-next').addEventListener('click', function () { galleryGoTo((galleryIndex + 1) % galleryVideos.length); });
+  document.getElementById('gallery-prev-thumb').addEventListener('click', function () { galleryGoTo((galleryIndex - 1 + galleryVideos.length) % galleryVideos.length); });
+  document.getElementById('gallery-next-thumb').addEventListener('click', function () { galleryGoTo((galleryIndex + 1) % galleryVideos.length); });
+  galleryRender();
+
+  // =========================================================================
+  // Past performances modal
+  // =========================================================================
+  var ppModal = document.getElementById('past-performances-modal');
+  var ppGrid = document.getElementById('past-performances-grid');
+  pastPerformances.forEach(function (p) {
+    var card = document.createElement('div');
+    card.className = 'rounded-lg border border-amber-900/30 bg-black/40 overflow-hidden card-hover';
+    card.innerHTML =
+      '<button class="relative w-full block group" style="aspect-ratio:16/9" data-video="' + p.video + '">' +
+        '<img src="' + p.image + '" alt="' + p.type + '" class="w-full h-full object-cover">' +
+        '<span class="absolute inset-0 bg-black/40 flex items-center justify-center">' +
+          '<span class="w-14 h-14 bg-red-600 group-hover:bg-red-700 rounded-full flex items-center justify-center transition-all transform group-hover:scale-110 shadow-xl">' +
+            '<i data-lucide="play" class="w-6 h-6 text-white ml-1"></i>' +
+          '</span>' +
+        '</span>' +
+      '</button>' +
+      '<div class="p-4 space-y-1">' +
+        '<p class="text-lg font-semibold text-amber-400">' + p.type + '</p>' +
+        '<p class="text-sm text-gray-300"><span class="text-gray-500">Date:</span> ' + p.date + '</p>' +
+        '<p class="text-sm text-gray-300"><span class="text-gray-500">Venue:</span> ' + p.venue + '</p>' +
+        '<p class="text-sm text-gray-300"><span class="text-gray-500">Attendance:</span> ' + p.attendees + '</p>' +
+      '</div>';
+    ppGrid.appendChild(card);
+  });
+  lucide.createIcons();
+
+  document.getElementById('view-past-performances').addEventListener('click', function () {
+    ppModal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('close-past-performances').addEventListener('click', closePastPerformances);
+  ppModal.addEventListener('click', function (e) { if (e.target === ppModal) closePastPerformances(); });
+  function closePastPerformances() {
+    ppModal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
+
+  // ---- video lightbox (used by past-performance thumbnails) ----
+  var lightbox = document.getElementById('video-lightbox');
+  var lightboxVideo = document.getElementById('lightbox-video');
+  ppGrid.addEventListener('click', function (e) {
+    var btn = e.target.closest('[data-video]');
+    if (!btn) return;
+    lightboxVideo.src = btn.getAttribute('data-video');
+    lightbox.classList.remove('hidden');
+  });
+  document.getElementById('close-video-lightbox').addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  function closeLightbox() {
+    lightboxVideo.pause();
+    lightboxVideo.removeAttribute('src');
+    lightboxVideo.load();
+    lightbox.classList.add('hidden');
+  }
+
+  // Esc closes whichever overlay is open
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    if (!lightbox.classList.contains('hidden')) closeLightbox();
+    else if (!ppModal.classList.contains('hidden')) closePastPerformances();
+  });
+</script>
+</body>
+</html>
